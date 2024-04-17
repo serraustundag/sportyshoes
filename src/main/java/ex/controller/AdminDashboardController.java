@@ -72,7 +72,7 @@ public class AdminDashboardController {
         model.addAttribute("products", listOfProduct);
         model.addAttribute("msg", result);
         model.addAttribute("buttonValue", name);
-        return "index";
+        return "admindashboard";
     }
 
     @RequestMapping(value = "/deleteProduct",method = RequestMethod.GET)
