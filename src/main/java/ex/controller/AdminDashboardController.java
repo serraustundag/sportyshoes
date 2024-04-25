@@ -1,7 +1,10 @@
 package ex.controller;
 
+import ex.entity.Login;
 import ex.entity.Orders;
 import ex.entity.Product;
+import ex.repository.LoginRepository;
+import ex.service.LoginService;
 import ex.service.OrdersService;
 import ex.service.ProductService;
 import jakarta.servlet.http.HttpServletRequest;
@@ -32,6 +35,9 @@ public class AdminDashboardController {
 
     @Autowired
     OrdersService ordersService;
+
+    @Autowired
+    LoginService loginService;
 
 
     @RequestMapping(value = "admindashboard",method = RequestMethod.GET)
@@ -88,7 +94,7 @@ public class AdminDashboardController {
         model.addAttribute("buttonValue", name);
         List<Object[]> orderdetails = productService.orderDetails();
         model.addAttribute("orderdetails", orderdetails);
-        return "index";
+        return "admindashboard";
     }
 
     @RequestMapping(value = "/updateProduct",method = RequestMethod.GET)
@@ -104,24 +110,12 @@ public class AdminDashboardController {
         model.addAttribute("orderdetails", orderdetails);
         //model.addAttribute("msg", result);
 
-        return "index";
+        return "admindashboard";
     }
-
-
-    @RequestMapping(value = "/orderPlace",method = RequestMethod.GET)
-    public String placeOrder(Model model, HttpServletRequest req, Orders order, Product product) {
-        int pid = Integer.parseInt(req.getParameter("pid"));
-        order.setPid(pid);
-        String name="Store Product";
-        String result = ordersService.placeOrder(order);
-        List<Product> listOfProduct = productService.findAllProducts();
-        model.addAttribute("products", listOfProduct);
-        model.addAttribute("product", product);
-        model.addAttribute("msg", result);
-        model.addAttribute("buttonValue", name);
-        //model.addAttribute("msg", result);
-        List<Object[]> orderdetails = productService.orderDetails();
-        model.addAttribute("orderdetails", orderdetails);
-        return "index";
-    }
+    @RequestMapping(value="/searchUser", method = RequestMethod.GET)
+        public String searchUsers(Model model, HttpServletRequest req) {
+        int id = Integer.parseInt(req.getParameter("id"));
+        List <Login> loggedInUsers = loginService.loggedInUsers(id);
+        model.addAttribute("loggedInUsers", loggedInUsers);
+        return "admindashboard";     }
 }

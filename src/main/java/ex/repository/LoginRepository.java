@@ -6,11 +6,16 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
+import java.util.List;
 import java.util.Optional;
 
 @Repository
-public interface LoginRepository extends JpaRepository<Login, Integer>{
+public interface LoginRepository extends JpaRepository<Login, Integer> {
 
     //@Query("select l from Login l where l.username = :username")
     public Optional<Login> findByUsername(String username);
+
+   // public List<Login> findByUsernameContaining(String keyword);
+
+    public List<Login> findLoginById(int id);
 }

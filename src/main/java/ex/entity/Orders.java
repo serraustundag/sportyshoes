@@ -1,9 +1,6 @@
 package ex.entity;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 
 import java.time.LocalDateTime;
 
@@ -32,6 +29,16 @@ public class Orders {
     public void setLdt(LocalDateTime ldt) {
         this.ldt = ldt;
     }
+    @ManyToOne
+    @JoinColumn(name = "userId", referencedColumnName = "id")
+    private Login login;
+    public Login getLogin() {
+        return login;
+    }
+    public void setLogin(Login login) {
+        this.login = login;
+    }
+
     @Override
     public String toString() {
         return "Orders [oid=" + oid + ", pid=" + pid + ", ldt=" + ldt + "]";
