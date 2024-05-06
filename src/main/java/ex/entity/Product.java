@@ -15,6 +15,8 @@ public class Product {
     private int pid;
     private String pname;
     private float price;
+    private String category; // Kategori alanı
+
     @OneToMany(cascade = CascadeType.ALL)
     @JoinColumn(name = "pid")
     private List <Orders> listOfOrders;
@@ -47,5 +49,13 @@ public class Product {
 
     public void setPrice(float price) {
         this.price = price;
+    }
+
+    public String getCategory() {
+        return category;
+    }
+
+    public void setCategory(String category) {
+        this.category = category;
     }
 }

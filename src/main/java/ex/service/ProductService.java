@@ -63,6 +63,7 @@ public class ProductService {
             Product p = result.get();
             p.setPname(product.getPname());
             p.setPrice(product.getPrice());
+            p.setCategory(product.getCategory());
             productRepository.saveAndFlush(p);
             return "Product updated successfully";
         }else {

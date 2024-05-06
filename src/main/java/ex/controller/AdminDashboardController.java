@@ -62,6 +62,7 @@ public class AdminDashboardController {
         product.setPid(0);
         product.setPname("");
         product.setPrice(0);
+        product.setCategory("");
         model.addAttribute("product", product);
         List<Product> listOfProduct = productService.findAllProducts();
         List<Object[]> orderdetails = productService.orderDetails();
