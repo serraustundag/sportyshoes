@@ -22,5 +22,10 @@ public class OrdersService {
         ordersRepository.save(orders);
         return "Order placed successfully for product "+orders.getPid();
     }
+    /*
+    public List<Object[]> findOrdersByUserId(int id) {
+       return ordersRepository.findOrdersByUserId(id);
+    }
 
+     */
 }

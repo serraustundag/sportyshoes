@@ -3,6 +3,7 @@ package ex.service;
 import java.util.List;
 import java.util.Optional;
 
+import ex.entity.Orders;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -72,9 +73,16 @@ public class ProductService {
     public List<Object[]> orderDetails() {
         return productRepository.orderDetails();		// custom methods
     }
+    /*
+    public List<Orders> findOrdersByUserId(int id) {
+        return productRepository.findOrdersByUserId(id);
+    }
 
-
-}
+     */
+    public List<Object[]> getOrdersByUserId(int userId) {
+        return productRepository.findOrdersByUserId(userId);
+    }
+ }
 
 
 

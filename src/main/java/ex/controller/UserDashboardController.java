@@ -32,9 +32,11 @@ public class UserDashboardController {
     public String open(Model model, Product product) {
 
         String name="Store Product";
+        int userId = getUserIdFromSession();
 
         List<Product> listOfProduct = productService.findAllProducts();
-        List<Object[]> orderdetails = productService.orderDetails();
+       // List<Object[]> orderdetails = productService.orderDetails();
+        List<Object[]> orderdetails = productService.getOrdersByUserId(userId);
 
         model.addAttribute("products", listOfProduct);
         model.addAttribute("buttonValue", name);
@@ -59,7 +61,8 @@ public class UserDashboardController {
         model.addAttribute("msg", result);
         model.addAttribute("buttonValue", name);
         //model.addAttribute("msg", result);
-        List<Object[]> orderdetails = productService.orderDetails();
+      // List<Object[]> orderdetails = productService.orderDetails();
+        List<Object[]> orderdetails =  productService.getOrdersByUserId(userId);
         model.addAttribute("orderdetails", orderdetails);
         return "userdashboard";
     }
@@ -72,4 +75,5 @@ public class UserDashboardController {
         int userId = user.getId();
         return userId;
     }
+
 }
