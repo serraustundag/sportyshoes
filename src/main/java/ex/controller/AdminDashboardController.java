@@ -15,18 +15,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 import java.util.List;
-/*
-@Controller
-@RequestMapping("dashboard") //local/dashboard
-public class DashboardController {
 
-    @RequestMapping(value = "",method = RequestMethod.GET)
-    public String open(Model model) {
-        model.addAttribute("dashboard");
-        return "dashboard";
-    }
-}
-*/
 @Controller
 public class AdminDashboardController {
 
@@ -47,11 +36,13 @@ public class AdminDashboardController {
 
         List<Product> listOfProduct = productService.findAllProducts();
         List<Object[]> orderdetails = productService.orderDetails();
+        List<Login> loggedInUsers = loginService.findAllLoggedInUsers();
 
         model.addAttribute("products", listOfProduct);
         model.addAttribute("buttonValue", name);
         model.addAttribute("product", product);
         model.addAttribute("orderdetails", orderdetails);
+        model.addAttribute("loggedInUsers", loggedInUsers);
 
         System.out.println(listOfProduct);
         return "admindashboard";
@@ -112,10 +103,18 @@ public class AdminDashboardController {
 
         return "admindashboard";
     }
-    @RequestMapping(value="/searchUser", method = RequestMethod.GET)
-        public String searchUsers(Model model, HttpServletRequest req) {
-        int id = Integer.parseInt(req.getParameter("id"));
-        List <Login> loggedInUsers = loginService.loggedInUsers(id);
+    /*
+    @RequestMapping(value="/loggedInUsers", method = RequestMethod.GET)
+        public String loggedInUsers(Model model, HttpServletRequest req) {
+        List <Login> loggedInUsers = loginService.findAllLoggedInUsers();
         model.addAttribute("loggedInUsers", loggedInUsers);
         return "admindashboard";     }
+
+     */
+    @RequestMapping(value="/loggedInUsers", method = RequestMethod.GET)
+    public String loggedInUsers(Model model) {
+        List<Login> loggedInUsers = loginService.findAllLoggedInUsers();
+        model.addAttribute("loggedInUsers", loggedInUsers);
+        return "admindashboard";
+    }
 }

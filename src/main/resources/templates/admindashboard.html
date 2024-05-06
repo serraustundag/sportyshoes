@@ -78,16 +78,30 @@
         </tr>
     </table>
 </div>
-<table border="1" class="table">
+</td>
+</td>
+<button onclick="toggleUsersTable()">Show/Hide Signed Up Users</button>
+
+<table border="1" class="table" id="usersTable" style="display: none;">
     <tr>
         <th>Signed Up Users</th>
     </tr>
     <tr th:each="us:${loggedInUsers}">
-        <td th:text="${us[0]}"></td>
-        <td th:text="${us[1]}"></td>
-        <td th:text="${us[2]}"></td>
-        <td th:text="${us[3]}"></td>
+        <td th:text="${us.username}"></td>
+        <td th:text="${us.id}"></td>
+
     </tr>
 </table>
+
+<script>
+    function toggleUsersTable() {
+        var table = document.getElementById("usersTable");
+        if (table.style.display === "none") {
+            table.style.display = "table";
+        } else {
+            table.style.display = "none";
+        }
+    }
+</script>
 </body>
 </html>

@@ -15,7 +15,7 @@ public interface LoginRepository extends JpaRepository<Login, Integer> {
     //@Query("select l from Login l where l.username = :username")
     public Optional<Login> findByUsername(String username);
 
-   // public List<Login> findByUsernameContaining(String keyword);
-
     public List<Login> findLoginById(int id);
+    @Query("SELECT l FROM Login l")
+    List<Login> findAllLoggedInUsers();
 }

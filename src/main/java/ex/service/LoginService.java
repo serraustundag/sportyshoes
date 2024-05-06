@@ -54,8 +54,8 @@ public class LoginService implements UserDetailsService{
         return loginRepository.findByUsernameContaining(keyword);
     }
     */
-    public List<Login> loggedInUsers(int id) {
-        return loginRepository.findLoginById(id);		// custom methods
+    public List<Login> findAllLoggedInUsers() {
+        return loginRepository.findAllLoggedInUsers();		// custom methods
     }
 
 }
