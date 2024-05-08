@@ -19,11 +19,18 @@ public interface ProductRepository extends JpaRepository<Product, Integer>{
     @Query("select p from Product p where p.price >= :price")
     public 	List<Product> findProductByPrice(@Param("price") float price);
 
-    @Query("select p.pname,p.price,o.oid,o.ldt,p.category from Product p, Orders o where p.pid=o.pid")
+    @Query("select p.pname,p.price,o.oid,o.ldt,p.category,l.id from Product p, Orders o ,Login l where p.pid=o.pid")
     public List<Object[]> orderDetails();
 
     @Query("select p.pname, p.price, o.oid, o.ldt ,p.category from Product p, Orders o where p.pid = o.pid and o.login.id = :userId")
     List<Object[]> findOrdersByUserId(@Param("userId") int userId);
+
+    @Query("select p.pname, p.price, o.oid, o.ldt ,p.category, l.id from Product p, Orders o, Login l where p.pid = o.pid and o.login.id=l.id")
+    List<Object[]> findOrdersByUserId2();
+
+    @Query("select o.pid, p.pname, p.price,o.oid,o.ldt, p.category,l.id from Login l, Orders o, Product p where p.pid=o.oid")
+    List<Object[]> findProductsByCategories();
+
 
 
 }

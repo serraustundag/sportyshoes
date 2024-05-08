@@ -16,7 +16,9 @@ public class ProductService {
     @Autowired
     ProductRepository productRepository;
 
+
     public List<Product> findAllProducts() {
+        productRepository.flush();
         return productRepository.findAll();		// select * from product in SQL
     }											// select p from Product p in HQL/JPQL
 
@@ -72,16 +74,16 @@ public class ProductService {
     }
 
     public List<Object[]> orderDetails() {
-        return productRepository.orderDetails();		// custom methods
-    }
-    /*
-    public List<Orders> findOrdersByUserId(int id) {
-        return productRepository.findOrdersByUserId(id);
+        productRepository.flush();
+        return productRepository.orderDetails();
+        // custom methods
     }
 
-     */
     public List<Object[]> getOrdersByUserId(int userId) {
         return productRepository.findOrdersByUserId(userId);
+    }
+    public List<Object[]> getOrdersByUserId2() {
+        return productRepository.findOrdersByUserId2();
     }
  }
 

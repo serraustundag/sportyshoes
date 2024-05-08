@@ -12,6 +12,7 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
@@ -28,7 +29,7 @@ public class UserDashboardController {
     @Autowired
     LoginRepository loginRepository;
 
-    @RequestMapping(value = "userdashboard",method = RequestMethod.GET)
+    @GetMapping(value = "userdashboard")
     public String open(Model model, Product product) {
 
         String name="Store Product";
@@ -54,7 +55,7 @@ public class UserDashboardController {
         user.setId(userId); // Veya kullanıcının kimliğini içeren uygun bir alanı ayarlayın.
         order.setLogin(user);
         String name="Store Product";
-        String result = ordersService.placeOrder(order);
+        String result = ordersService.placeOrder(order,userId);
         List<Product> listOfProduct = productService.findAllProducts();
         model.addAttribute("products", listOfProduct);
         model.addAttribute("product", product);
@@ -74,6 +75,10 @@ public class UserDashboardController {
         Login user = userOptional.get();
         int userId = user.getId();
         return userId;
+    }
+    @GetMapping("/report")
+    public String showReportPage() {
+        return "report"; // Bu, resources/templates klasöründe report.html dosyasını gösterir
     }
 
 }

@@ -3,7 +3,6 @@ package ex.controller;
 import ex.entity.Login;
 import ex.entity.Orders;
 import ex.entity.Product;
-import ex.repository.LoginRepository;
 import ex.service.LoginService;
 import ex.service.OrdersService;
 import ex.service.ProductService;
@@ -11,9 +10,12 @@ import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 
+import java.time.LocalDateTime;
 import java.util.List;
 
 @Controller
@@ -30,12 +32,12 @@ public class AdminDashboardController {
 
 
     @RequestMapping(value = "admindashboard",method = RequestMethod.GET)
-    public String open(Model model, Product product) {
+    public String open(Model model, Product product,Login login) {
 
         String name="Store Product";
 
         List<Product> listOfProduct = productService.findAllProducts();
-        List<Object[]> orderdetails = productService.orderDetails();
+        List<Object[]> orderdetails = productService.getOrdersByUserId2();
         List<Login> loggedInUsers = loginService.findAllLoggedInUsers();
 
         model.addAttribute("products", listOfProduct);
@@ -104,14 +106,7 @@ public class AdminDashboardController {
 
         return "admindashboard";
     }
-    /*
-    @RequestMapping(value="/loggedInUsers", method = RequestMethod.GET)
-        public String loggedInUsers(Model model, HttpServletRequest req) {
-        List <Login> loggedInUsers = loginService.findAllLoggedInUsers();
-        model.addAttribute("loggedInUsers", loggedInUsers);
-        return "admindashboard";     }
 
-     */
     @RequestMapping(value="/loggedInUsers", method = RequestMethod.GET)
     public String loggedInUsers(Model model) {
         List<Login> loggedInUsers = loginService.findAllLoggedInUsers();

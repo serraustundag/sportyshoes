@@ -49,11 +49,7 @@ public class LoginService implements UserDetailsService{
         }
 
     }
-    /*
-    public List<Login> searchUsers(String keyword) {
-        return loginRepository.findByUsernameContaining(keyword);
-    }
-    */
+
     public List<Login> findAllLoggedInUsers() {
         return loginRepository.findAllLoggedInUsers();		// custom methods
     }

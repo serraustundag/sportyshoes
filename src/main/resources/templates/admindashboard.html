@@ -19,6 +19,8 @@
         <input type="text" name="pname" th:field="*{pname}" class="form-control"/><br/>
         <label>Price</label>
         <input type="number" name="price" th:field="*{price}" class="form-control"/><br/>
+        <label>Category</label>
+        <input type="text" name="category" th:field="*{category}" class="form-control"/><br/>
         <input type="submit" th:value="${buttonValue}" name="b1" class="btn btn-success"/>
         <input type="reset" value="reset" class="btn btn-info"/>
     </form>
@@ -72,6 +74,7 @@
             <th>OrderId</th>
             <th>OrderDateAndTime</th>
             <th>Category</th>
+            <th>UserId</th>
         </tr>
         <tr th:each="od:${orderdetails}">
             <td th:text="${od[0]}"></td>
@@ -79,7 +82,7 @@
             <td th:text="${od[2]}"></td>
             <td th:text="${od[3]}"></td>
             <td th:text="${od[4]}"></td>
-
+            <td th:text="${od[5]}"></td>
         </tr>
     </table>
 </div>
@@ -108,5 +111,7 @@
         }
     }
 </script>
+<a href="report">See Reports!</a>
+<a href="/logout">Logout</a>
 </body>
 </html>
