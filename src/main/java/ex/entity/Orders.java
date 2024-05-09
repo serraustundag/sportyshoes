@@ -7,9 +7,9 @@ import java.time.LocalDateTime;
 @Entity
 public class Orders {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)		// pk with auto_increment
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int oid;
-    private Integer pid;				// FK can hold null value but int can't in java side
+    private Integer pid;
     private LocalDateTime ldt;
     public int getOid() {
         return oid;

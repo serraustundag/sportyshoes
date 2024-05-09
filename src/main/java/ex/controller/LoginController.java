@@ -14,15 +14,14 @@ public class LoginController {
 
     @Autowired
     LoginService loginService;
-    // http://localhost:8080/register , method : post
 
     @Autowired
     PasswordEncoder passwordEncoder;
 
-    @GetMapping(value = "login") //http://localhost:8080/login
+    @GetMapping(value = "login")
     public String loginPage(Login login,Model model) {
         model.addAttribute("login", login);
-        return "index"; //index.html'i aç
+        return "index";
     }
 
     @GetMapping(value = "signup")

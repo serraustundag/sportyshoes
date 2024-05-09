@@ -27,18 +27,16 @@ public class MySeurifyConfiguration {
                     auth.requestMatchers("/admin/**").hasAnyRole("ADMIN");
                     auth.anyRequest().authenticated();
                 }).
-                //formLogin(form->form.permitAll()).		// it open pre-defined login page
-                        formLogin(form->form.loginPage("/login").
-                        //successForwardUrl("/user").
+                        formLogin(form->
+                        form.loginPage("/login").
                                 successHandler(new SuccessHandlerApp()).
-                        permitAll()). // it open custom login page
+                        permitAll()).
                         build();
     }
 
     @Autowired
-    LoginService loginService;			// it is a type of UserDetailsService
+    LoginService loginService;
 
-    // it is uses to connect spring security with DAO layer
     @Bean
     public AuthenticationProvider authenticationProvider() {
         DaoAuthenticationProvider dap = new DaoAuthenticationProvider();

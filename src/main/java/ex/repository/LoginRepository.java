@@ -12,10 +12,8 @@ import java.util.Optional;
 @Repository
 public interface LoginRepository extends JpaRepository<Login, Integer> {
 
-    //@Query("select l from Login l where l.username = :username")
     public Optional<Login> findByUsername(String username);
 
-    public List<Login> findLoginById(int id);
-    @Query("SELECT l FROM Login l")
+    @Query("SELECT l FROM Login l where l.role='USER'")
     List<Login> findAllLoggedInUsers();
 }

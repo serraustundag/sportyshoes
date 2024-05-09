@@ -3,7 +3,7 @@ package ex.service;
 import java.util.List;
 import java.util.Optional;
 
-import ex.entity.Orders;
+import ex.repository.OrdersRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -15,6 +15,8 @@ public class ProductService {
 
     @Autowired
     ProductRepository productRepository;
+    @Autowired
+    OrdersRepository ordersRepository;
 
 
     public List<Product> findAllProducts() {
@@ -66,6 +68,7 @@ public class ProductService {
             p.setPname(product.getPname());
             p.setPrice(product.getPrice());
             p.setCategory(product.getCategory());
+            p.setQuantity(product.getQuantity());
             productRepository.saveAndFlush(p);
             return "Product updated successfully";
         }else {
@@ -80,10 +83,14 @@ public class ProductService {
     }
 
     public List<Object[]> getOrdersByUserId(int userId) {
-        return productRepository.findOrdersByUserId(userId);
+        return ordersRepository.findOrdersByUserId(userId);
     }
     public List<Object[]> getOrdersByUserId2() {
-        return productRepository.findOrdersByUserId2();
+        return ordersRepository.findOrdersByUserId2();
+    }
+
+    public List<String> getAllCategories() {
+        return productRepository.findDistinctByCategory();
     }
  }
 

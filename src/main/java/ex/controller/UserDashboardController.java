@@ -36,7 +36,6 @@ public class UserDashboardController {
         int userId = getUserIdFromSession();
 
         List<Product> listOfProduct = productService.findAllProducts();
-       // List<Object[]> orderdetails = productService.orderDetails();
         List<Object[]> orderdetails = productService.getOrdersByUserId(userId);
 
         model.addAttribute("products", listOfProduct);
@@ -52,7 +51,7 @@ public class UserDashboardController {
         order.setPid(pid);
         int userId = getUserIdFromSession();
         Login user = new Login();
-        user.setId(userId); // Veya kullanıcının kimliğini içeren uygun bir alanı ayarlayın.
+        user.setId(userId);
         order.setLogin(user);
         String name="Store Product";
         String result = ordersService.placeOrder(order,userId);
@@ -61,8 +60,6 @@ public class UserDashboardController {
         model.addAttribute("product", product);
         model.addAttribute("msg", result);
         model.addAttribute("buttonValue", name);
-        //model.addAttribute("msg", result);
-      // List<Object[]> orderdetails = productService.orderDetails();
         List<Object[]> orderdetails =  productService.getOrdersByUserId(userId);
         model.addAttribute("orderdetails", orderdetails);
         return "userdashboard";
@@ -75,10 +72,6 @@ public class UserDashboardController {
         Login user = userOptional.get();
         int userId = user.getId();
         return userId;
-    }
-    @GetMapping("/report")
-    public String showReportPage() {
-        return "report"; // Bu, resources/templates klasöründe report.html dosyasını gösterir
     }
 
 }

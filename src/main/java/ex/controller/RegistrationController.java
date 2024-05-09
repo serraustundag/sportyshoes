@@ -13,7 +13,6 @@ public class RegistrationController {
 
     @Autowired
     LoginService loginService;
-    // http://localhost:8080/register , method : post
 
     @Autowired
     PasswordEncoder passwordEncoder;
